@@ -1,13 +1,18 @@
-# SPDX-FileCopyrightText: 2020 Serokell <https://serokell.io>
-# SPDX-License-Identifier: MPL-2.0
+<!--
+SPDX-FileCopyrightText: 2020 Serokell <https://serokell.io/>
 
-* Generate systemd units from NixOS-style descriptions
+SPDX-License-Identifier: MPL-2.0
+-->
 
-** Descriptions of functions
+# `systemd-nix`
+
+Generate systemd units from NixOS-style descriptions
+
+## Descriptions of functions
 
 Given a NixOS-style description of a systemd unit, like
 
-#+BEGIN_SRC nix
+```nix
 {
   description = "A daemon to upload nix store paths to a remote store asynchronously";
   wantedBy = [ "default.target" ];
@@ -20,13 +25,13 @@ Given a NixOS-style description of a systemd unit, like
     +RTS -N$(nproc)'';
   serviceConfig.Restart = "always";
 }
-#+END_SRC
+```
 
-*** =mkService=
+### `mkService`
 
 Will generate a systemd service description, like
 
-#+BEGIN_SRC conf
+```conf
 [Unit]
 Description=A daemon to upload nix store paths to a remote store asynchronously
 
@@ -37,14 +42,16 @@ Environment="TZDIR=<...>/share/zoneinfo"
 
 ExecStart=/nix/store/<...>-unit-script-upload-daemon-start/bin/upload-daemon-start
 Restart=always
-#+END_SRC
+```
 
-*** =mkUserService=
+### `mkUserService`
 
-Will generate an activation script that [re]installs and [re]starts the service generate as described above.
+Will generate an activation script that \[re\]installs and \[re\]starts
+the service generate as described above.
 
-** Usage example
-#+BEGIN_SRC nix
+## Usage example
+
+```nix
 {
   inputs = {
     systemd-nix = {
@@ -76,15 +83,20 @@ Will generate an activation script that [re]installs and [re]starts the service 
       };
     };
 }
-#+END_SRC
+```
 
-** License
+## License
 
-systemd-nix is licensed under the Mozilla Public License Version 2.0. You can read it in [[file:LICENSE][./LICENSE]].
+systemd-nix is licensed under the Mozilla Public License Version 2.0.
+You can read it in [./LICENSE](LICENSE).
 
-** About Serokell
+## About Serokell
 
-systemd-nix is maintained and funded with ❤️ by [[https://serokell.io/][Serokell]].
-The names and logo for Serokell are trademark of Serokell OÜ.
+systemd-nix is maintained and funded with ❤️ by
+[Serokell](https://serokell.io/). The names and logo for Serokell are
+trademark of Serokell OÜ.
 
-We love open source software! See [[https://serokell.io/community?utm_source=github][our other projects]] or [[https://serokell.io/hire-us?utm_source=github][hire us]] to design, develop and grow your idea!
+We love open source software! See [our other
+projects](https://serokell.io/community?utm_source=github) or [hire
+us](https://serokell.io/hire-us?utm_source=github) to design, develop
+and grow your idea!
